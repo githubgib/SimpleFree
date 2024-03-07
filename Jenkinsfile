@@ -1,29 +1,78 @@
 pipeline {
     agent any
+
     stages {
-        stage("Clean Up"){
+        stage('Checkout') {
             steps {
-                deleteDir()
+                checkout scm
             }
         }
-        stage("Clone Repo"){
+
+        stage('Verify Python Files') {
             steps {
-                sh "git clone https://github.com/jenkins-docs/simple-java-maven-app.git"
-            }
-        }
-        stage("Build"){
-            steps {
-                dir("simple-java-maven-app") {
-                    sh "mvn clean install"
+                script {
+                    sh 'ls -la *.py'
                 }
             }
         }
-        stage("Test"){
+
+        stage('Build Docker Image') {
             steps {
-                dir("simple-java-maven-app") {
-                    sh "mvn test"
+                script { 
+                    dockerImage = docker.build('your-docker-image-name:latest')
                 }
             }
         }
+        stage('Lint Code3') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh '/usr/local/bin/pylint **/*.py || exit 1'
+                    }
+                }
+            }
+        }
+
+        stage('Debug Environment') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh 'pip list' // List installed Python packages
+                        sh 'which pylint || echo pylint not found'
+                        sh 'pylint --version || echo pylint version command failed'
+                    }
+                }
+            }
+        }
+
+
+        stage('Lint Code') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        // Run PyLint command within the Docker container
+                        sh 'pylint **/*.py || exit 1'
+                        sh 'pylint --version'
+                        sh 'ls -la'
+                    }
+                }
+            }
+        }
+
+        // If you need a separate stage for any reason
+        stage('Lint Code2') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh '/usr/local/bin/pylint **/*.py'
+                        sh 'pylint --version'
+                        sh 'ls -la'
+                        // If you need to run PyLint on specific files
+                        // sh '/usr/local/bin/pylint specific_file.py'
+                     }
+              }
+            }
+        }
+
     }
 }
