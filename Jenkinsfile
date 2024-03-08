@@ -47,10 +47,12 @@ pipeline {
                     dockerImage.inside {
                         // Correctly use the PyLint command with the custom rcfile and init-hook
                         // This command does everything in one go: creates cache directory and runs pylint
+
                         sh '''
                         pylint --init-hook="import os; os.makedirs('/tmp/.pylint_cache', exist_ok=True)" \
                                --rcfile=/app/.pylintrc **/*.py || exit 1
                         '''
+
                         // Additional debugging step: list the contents of the pylint cache directory
                         sh 'ls -la /tmp/.pylint_cache || echo "Cache directory not found"'
                     }
