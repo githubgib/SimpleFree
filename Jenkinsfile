@@ -24,6 +24,18 @@ pipeline {
             }
         }
 
+        stage('Debug Environment2') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh 'pip list' // List installed Python packages
+                        sh 'which pylint || echo pylint not found'
+                        sh 'pylint --version || echo pylint version command failed'
+                    }
+                }
+            }
+        }
+
         // Combined linting stage
         stage('Lint Code4') {
             steps {
