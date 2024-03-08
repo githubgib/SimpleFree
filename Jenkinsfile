@@ -25,7 +25,7 @@ pipeline {
         }
 
         // Combined linting stage
-        stage('Lint Code') {
+        stage('Lint Code4') {
             steps {
                 script {
                     dockerImage.inside {
