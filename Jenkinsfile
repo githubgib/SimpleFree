@@ -23,6 +23,19 @@ pipeline {
                 }
             }
         }
+
+        // Combined linting stage
+        stage('Lint Code') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        // Use the PyLint command with the custom rcfile
+                        sh 'pylint --rcfile=/app/.pylintrc **/*.py || exit 1'
+                    }
+                }
+            }
+        }
+  
         stage('Lint Code3') {
             steps {
                 script {
