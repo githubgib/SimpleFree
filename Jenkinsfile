@@ -45,7 +45,8 @@ pipeline {
             steps {
                 script {
                     dockerImage.inside {
-                        //sh 'mkdir -p /tmp/.pylint_cache'
+                        sh 'mkdir -p /tmp/.pylint_cache'
+                        //sh 'pylint --init-hook="import os; os.makedirs(\'/tmp/.pylint_cache\', exist_ok=True)" --rcfile=/app/.pylintrc **/*.py || exit 1'
                         sh 'pylint --init-hook="import os; os.makedirs(\'/tmp/.pylint_cache\', exist_ok=True)" --rcfile=/app/.pylintrc **/*.py || exit 1'
                         
                     }
