@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 
 # Install the latest pylint
 # RUN pip install pylint==2.11
-# RUN pip install --upgrade pylint
+RUN pip install --upgrade pylint
 # RUN pylint --version
 RUN pip install pylama
 
