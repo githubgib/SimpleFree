@@ -3,8 +3,10 @@
 This module provides a utility function to add two numbers.
 """
 
+
 def add_numbers(a, b):
-    """Add two numbers.
+    """
+    Add two numbers.
 
     Args:
         a (int or float): The first number.
@@ -12,8 +14,10 @@ def add_numbers(a, b):
 
     Returns:
         int or float: The sum of the two numbers.
+
     """
     return a + b
+
 
 # Corrected the spacing around these comments to adhere to PEP 8
 print(add_numbers(3, 4))  # Add numbers 3 and 4
