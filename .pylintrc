@@ -1,2 +1,3 @@
 [MASTER]
-# cache-dir=/tmp/.pylint_cache
+cache-dir=/app/.pylint_cache
+
