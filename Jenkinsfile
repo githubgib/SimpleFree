@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script {
                     dockerImage.inside {
-                        sh 'pylama /path/to/your/code'
+                        sh 'pylama'
                     }
                 }
             }
