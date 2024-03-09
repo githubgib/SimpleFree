@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 # RUN pip install pylint==2.11
 # RUN pip install --upgrade pylint
 # RUN pylint --version
+RUN pip install pycodestyle
 RUN pip install pylama
 
 
