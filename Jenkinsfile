@@ -46,7 +46,11 @@ pipeline {
                 script {
                     dockerImage.inside {
                         // Use the PyLint command with the custom rcfile
-                        sh 'pylint --rcfile=/app/.pylintrc **/*.py || exit 1'
+                        sh '''
+                        pylint --init-hook="import os; os.makedirs('/tmp/.pylint_cache', exist_ok=True)" \
+                               --rcfile=/app/.pylintrc **/*.py || exit 1
+                        '''
+
                     }
                 }
             }
