@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 # RUN mkdir -p /tmp/.pylint_cache && chmod -R 777 /tmp/.pylint_cache
 
 # Install the latest pylint
-RUN pip install pylint==2.11
-# RUN pip install --upgrade pylint
+# RUN pip install pylint==2.11
+RUN pip install --upgrade pylint
 RUN pylint --version
 
 # Set up a working directory
