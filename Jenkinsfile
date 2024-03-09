@@ -45,8 +45,16 @@ pipeline {
             steps {
                 script {
                     dockerImage.inside {
-                        sh 'mkdir -p /tmp/.pylint_cache'
-                        sh 'pylint --cache-dir=/tmp/.pylint_cache --rcfile=/app/.pylintrc **/*.py || exit 1'
+
+                        def cacheDir = "/tmp/.pylint_cache"
+
+                        // Run pylint with the cache directory
+                        sh "pylint --init-hook='import os; os.makedirs(\"${cacheDir}\", exist_ok=True)' --rcfile=/app/.pylintrc **/*.py || exit 1"
+
+
+                        
+                        # sh 'mkdir -p /tmp/.pylint_cache'
+                        # sh 'pylint --cache-dir=/tmp/.pylint_cache --rcfile=/app/.pylintrc **/*.py || exit 1'
                     }
                 }
             }
