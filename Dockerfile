@@ -1,5 +1,5 @@
 # Use the official Python image as base
-FROM python:3.8
+FROM python:3
 
 # Install python3 and pip (if not already present)
 RUN apt-get update && apt-get install -y python3 python3-pip
@@ -9,8 +9,10 @@ RUN apt-get update && apt-get install -y python3 python3-pip
 
 # Install the latest pylint
 # RUN pip install pylint==2.11
-RUN pip install --upgrade pylint
-RUN pylint --version
+# RUN pip install --upgrade pylint
+# RUN pylint --version
+RUN pip install pylama
+
 
 # Set up a working directory
 WORKDIR /app
