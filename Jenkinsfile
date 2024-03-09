@@ -31,9 +31,9 @@ pipeline {
                         // List installed Python packages
                         sh 'pip list'
                         // Verify the presence of pylint
-                        sh 'which pylint || echo pylint not found'
+                        //sh 'which pylint || echo pylint not found'
                         // Check the version of pylint
-                        sh 'pylint --version || echo pylint version command failed'
+                        //sh 'pylint --version || echo pylint version command failed'
                         // Check for write permission in /tmp (optional)
                         sh 'touch /tmp/test_permission && echo "Write permission in /tmp OK" || echo "No write permission in /tmp"'
                     }
