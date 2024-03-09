@@ -41,6 +41,21 @@ pipeline {
             }
         }
 
+        stage('Lint Code6') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        // Use the PyLint command with the custom rcfile
+                        sh '''
+                        find . -name "*.py" | xargs pylint --init-hook="import os; os.makedirs('/tmp/.pylint_cache', exist_ok=True)" \
+                               --rcfile=/app/.pylintrc || exit 1
+                        '''
+                    }
+                }
+            }
+        }
+
+
         stage('Lint Code5') {
             steps {
                 script {
