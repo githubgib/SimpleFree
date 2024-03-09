@@ -1,5 +1,5 @@
 # Use the official Python image as base
-FROM python:3
+FROM python:3.8
 
 # Install python3 and pip (if not already present)
 RUN apt-get update && apt-get install -y python3 python3-pip
