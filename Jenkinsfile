@@ -46,6 +46,7 @@ pipeline {
                 script {
                     dockerImage.inside {
                         sh 'pylama'
+                        sh 'pylama -v'
                     }
                 }
             }
