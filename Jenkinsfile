@@ -41,6 +41,17 @@ pipeline {
             }
         }
 
+        stage('Lint Code with Pylama') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh 'pylama /path/to/your/code'
+                    }
+                }
+            }
+        }
+
+
         stage('Lint Code7') {
             steps {
                 script {
