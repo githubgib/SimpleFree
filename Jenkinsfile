@@ -41,6 +41,17 @@ pipeline {
             }
         }
 
+        stage('Lint Code7') {
+            steps {
+                script {
+                    dockerImage.inside {
+                        sh 'mkdir -p /tmp/.pylint_cache'
+                        sh 'pylint --cache-dir=/tmp/.pylint_cache --rcfile=/app/.pylintrc **/*.py || exit 1'
+                    }
+                }
+            }
+        }
+
         stage('Lint Code6') {
             steps {
                 script {
