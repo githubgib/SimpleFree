@@ -4,6 +4,9 @@ FROM python:3
 # Install python3 and pip (if not already present)
 RUN apt-get update && apt-get install -y python3 python3-pip
 
+# Create cache directory
+RUN mkdir -p /tmp/.pylint_cache && chmod -R 777 /tmp/.pylint_cache
+
 # Install the latest pylint
 RUN pip install --upgrade pylint
 RUN pylint --version
