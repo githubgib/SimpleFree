@@ -1,6 +1,7 @@
+import os
 def add_numbers(a, b):
     """Add two numbers."""
-    return a + b
+    return a + b + pi
 
 
 # Corrected the spacing around these comments to adhere to PEP 8
